@@ -8,17 +8,17 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: 'http://localhost:3001',
+        target: 'https://hpl-auction.onrender.com/',
         changeOrigin: true,
         secure: false,
       },
       '/uploads': {
-        target: 'http://localhost:3001',
+        target: 'https://hpl-auction.onrender.com/',
         changeOrigin: true,
         secure: false,
       },
       '/socket.io': {
-        target: 'http://localhost:3001',
+        target: 'https://hpl-auction.onrender.com/',
         ws: true,
       },
     },
