@@ -50,11 +50,8 @@ app.use('/api/players', require('./routes/playerRoutes'));
 app.use('/api/sets', require('./routes/setRoutes'));
 app.use('/api/auction', require('./routes/auctionRoutes'));
 app.use('/api/logs', require('./routes/logRoutes'));
-
-// Health check
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', service: 'HPL Auction API', timestamp: new Date() });
-});
+app.use('/api/health', require('./routes/healthRoutes'));
+app.get('/health', require('./controllers/healthController').getLiveness);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
