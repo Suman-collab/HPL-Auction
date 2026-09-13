@@ -1,14 +1,6 @@
 import { io } from 'socket.io-client';
 
-const getSocketUrl = () => {
-  const value = import.meta.env.VITE_SOCKET_URL;
-  if (!value) {
-    throw new Error('Missing required frontend environment variable: VITE_SOCKET_URL');
-  }
-  return value.replace(/\/$/, '');
-};
-
-export const socket = io(getSocketUrl(), {
+export const socket = io(import.meta.env.DEV ? undefined : 'https://hpl-auction.onrender.com', {
   autoConnect: true,
   reconnection: true,
   reconnectionAttempts: 10,

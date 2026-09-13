@@ -19,11 +19,12 @@ const server = http.createServer(app);
 const allowedOrigins = process.env.CORS_ORIGIN.split(',')
   .map((origin) => origin.trim())
   .filter(Boolean);
+const corsOrigin = allowedOrigins.includes('*') ? true : allowedOrigins;
 
 // Initialize Socket.IO
 const io = new Server(server, {
   cors: {
-    origin: allowedOrigins,
+    origin: corsOrigin,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
   },
@@ -33,7 +34,7 @@ initSocket(io);
 // Middleware
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: corsOrigin,
     credentials: true,
   })
 );

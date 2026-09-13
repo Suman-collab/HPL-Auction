@@ -1,12 +1,4 @@
-const getRequiredEnv = (name) => {
-  const value = import.meta.env[name];
-  if (!value) {
-    throw new Error(`Missing required frontend environment variable: ${name}`);
-  }
-  return value.replace(/\/$/, '');
-};
-
-const API_BASE = getRequiredEnv('VITE_API_BASE');
+const API_BASE = import.meta.env.DEV ? '/api' : 'https://hpl-auction.onrender.com/api';
 
 async function smartFetch(urlOrPath, options = {}) {
   const url = urlOrPath.startsWith('http')
